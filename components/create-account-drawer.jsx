@@ -69,7 +69,7 @@ const CreateAccountDrawer = ({ children }) => {
   }, [error]);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    await createAccountFn(data);
   };
 
   return (
