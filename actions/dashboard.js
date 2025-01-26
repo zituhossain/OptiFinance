@@ -4,7 +4,7 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
-const serializTransaction = (obj) => {
+const serializeTransaction = (obj) => {
   const serialized = { ...obj };
   if (obj.balance) {
     serialized.balance = obj.balance.toNumber();
@@ -57,7 +57,7 @@ export async function createAccount(data) {
       },
     });
 
-    const serializedAccount = serializTransaction(account);
+    const serializedAccount = serializeTransaction(account);
 
     revalidatePath("/dashboard");
 
@@ -90,7 +90,7 @@ export async function getUserAccounts() {
         },
       },
     });
-    const serializedAccount = accounts.map(serializTransaction);
+    const serializedAccount = accounts.map(serializeTransaction);
 
     return serializedAccount;
   } catch (error) {
